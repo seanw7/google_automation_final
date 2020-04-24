@@ -3,9 +3,10 @@ import os
 import datetime
 import reports
 from run import process_txtfile, collect_txtfiles
+from emails import generate_email, send_email
 
 description_loc = 'supplier-data/descriptions'
-
+lab_user = 'TODO: INSERT THIS'
 
 def prepare_desc():
     collected_files = collect_txtfiles(description_loc)
@@ -30,6 +31,7 @@ def prepare_desc():
 
 
 if __name__ == "__main__":
+    # Prepare PDF file report
     attachment = 'processed.pdf'
     current_date = datetime.datetime.today().strftime("%B, %d %Y")
     
@@ -37,3 +39,11 @@ if __name__ == "__main__":
     paragraph = prepare_desc()  #file_dict['description']
 
     reports.generate_report(attachment, title, paragraph)
+
+    # Create Email and send it
+    sender = "automation@example.com"
+    recipient = "{}@example.com".format(lab_user)
+    email_subject = "Upload Completed - Online Fruit Store"
+    email_body = "All fruits are uploaded to our website successfully. A detailed list is attached to this email."
+    email_message = generate_email(sender, recipient, email_subject, email_body, attachment)
+    send_email(email_message)
