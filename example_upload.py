@@ -6,8 +6,8 @@ import os
 
 
 
-
-url = "http://localhost/upload"
+lab_ip = "TODO: INSERT THIS"
+url = "http://{}/upload".format(lab_ip)
 type_to_convert = ('.jpg','.jpeg')
 upload_files_from = "/home/sean/Documents/courses/google_python_automation/course 6/"
 
@@ -26,7 +26,6 @@ def post_files(list_of_files):
 
 
 files_to_upload = list_of_imgfiles(upload_files_from)
-# upload_files = 
 post_files(files_to_upload)
 
 

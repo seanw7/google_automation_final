@@ -34,10 +34,8 @@ if __name__ == "__main__":
     # Prepare PDF file report
     attachment = 'processed.pdf'
     current_date = datetime.datetime.today().strftime("%B, %d %Y")
-    
     title = 'Processed update on {}'.format(current_date)
     paragraph = prepare_desc()  #file_dict['description']
-
     reports.generate_report(attachment, title, paragraph)
 
     # Create Email and send it
