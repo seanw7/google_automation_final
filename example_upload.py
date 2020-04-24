@@ -21,8 +21,8 @@ def list_of_imgfiles(folder_loc):
 def post_files(list_of_files):
     for file in list_of_files:
         with open(os.path.join(upload_files_from, file), 'rb') as opened:
-            print(opened)
-            #r = requests.post(url, files={'file': opened})
+            # print(opened)
+            requests.post(url, files={'file': opened})
 
 
 files_to_upload = list_of_imgfiles(upload_files_from)
