@@ -5,17 +5,17 @@ import reports
 from run import process_txtfile, collect_txtfiles
 from emails import generate_email, send_email
 
-description_loc = 'supplier-data/descriptions'
-lab_user = 'TODO: INSERT THIS'
+description_loc = '/home/{}/supplier-data/descriptions'.format(os.environ['USER'])
+lab_user = 'student-00-c0db38a6db13'
 
 def prepare_desc():
     collected_files = collect_txtfiles(description_loc)
     full_description = ""
     for file in collected_files:
         dict_obj = process_txtfile(file)
-        formatted_desc = """name: {}
-                            weight: {} lbs
-
+        formatted_desc = """name: {}\n
+                            weight: {} lbs\n
+                            \r\n
                         """.format(dict_obj['name'], dict_obj['weight'])
         full_description += formatted_desc
     return full_description
@@ -36,6 +36,7 @@ if __name__ == "__main__":
     current_date = datetime.datetime.today().strftime("%B, %d %Y")
     title = 'Processed update on {}'.format(current_date)
     paragraph = prepare_desc()  #file_dict['description']
+    print("Paragraph: ", paragraph)
     reports.generate_report(attachment, title, paragraph)
 
     # Create Email and send it
