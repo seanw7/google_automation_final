@@ -13,9 +13,9 @@ def prepare_desc():
     full_description = ""
     for file in collected_files:
         dict_obj = process_txtfile(file)
-        formatted_desc = """name: {}\n
-                            weight: {} lbs\n
-                            \r\n
+        formatted_desc = """name: {}<br/>
+                            weight: {} lbs<br/>
+                            <br/>
                         """.format(dict_obj['name'], dict_obj['weight'])
         full_description += formatted_desc
     return full_description
@@ -33,8 +33,8 @@ def prepare_desc():
 if __name__ == "__main__":
     # Prepare PDF file report
     attachment = 'processed.pdf'
-    current_date = datetime.datetime.today().strftime("%B, %d %Y")
-    title = 'Processed update on {}'.format(current_date)
+    current_date = datetime.datetime.today().strftime("%B %d, %Y")
+    title = 'Processed Update on {}'.format(current_date)
     paragraph = prepare_desc()  #file_dict['description']
     print("Paragraph: ", paragraph)
     reports.generate_report(attachment, title, paragraph)

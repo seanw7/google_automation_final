@@ -34,8 +34,9 @@ import shutil
 import socket
 import psutil
 from emails import send_email
+from email.message import EmailMessage
 
-lab_user = "TODO: Insert here"
+lab_user = "student-00-c0db38a6db13"
 
 
 
@@ -80,18 +81,11 @@ def generate_error_report(sender, recipient, subject, body):
     
   """Creates an email with an attachement."""
   # Basic Email formatting
-  message = email.message.EmailMessage()
+  message = EmailMessage()
   message["From"] = sender
   message["To"] = recipient
-  message["Subject"] = subject
+  message["Subject"] = subject.pop()
   message.set_content(body)
-
-  # Process the attachment and add it to the email
-  attachment_filename = os.path.basename(attachment_path)
-  mime_type, _ = mimetypes.guess_type(attachment_path)
-  mime_type, mime_subtype = mime_type.split('/', 1)
-
-
 
   return message
 
@@ -114,7 +108,7 @@ def main():
     if not everything_ok:
         email_body = "Please check your system and resolve the issue as soon as possible."
         email_subject = failed_checks
-        sender = automation@example.com
+        sender = "automation@example.com"
         recipient = "{}@example.com".format(lab_user)
         error_report = generate_error_report(sender, recipient, email_subject, email_body)
         send_email(error_report)
